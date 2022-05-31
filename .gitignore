@@ -1,0 +1,4 @@
+*.tif
+*.laz
+*.vrt
+__pycache__
