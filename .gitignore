@@ -2,3 +2,4 @@
 *.laz
 *.vrt
 __pycache__
+*.passwd
