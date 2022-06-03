@@ -19,10 +19,10 @@ $(OUTPUTDIR)/%.tif: $(INPUTDIR)/%.laz
 #	@rm -f "$@.tmp"
 	@echo "Finished writing $@"
 
-dem.vrt:
+dem.vrt: $(DEMFILES)
 	@rm -f dem.vrt && gdalbuildvrt -overwrite dem.vrt $(OUTPUTDIR)/*/*/*25.tif
 
-server: dem.vrt
+server:
 	uvicorn tiler:app --reload --host 0.0.0.0 --port 3610
 
 mount:

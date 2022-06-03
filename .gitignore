@@ -3,3 +3,5 @@
 *.vrt
 __pycache__
 *.passwd
+input/
+inputremote
