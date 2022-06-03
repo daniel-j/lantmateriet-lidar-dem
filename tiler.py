@@ -43,7 +43,9 @@ from rasterio.io import MemoryFile
 
 cog = COGReader("dem.vrt", maxzoom=17, resampling_method="nearest")
 
-print(cog.info())
+coginfo = cog.info()
+print(coginfo)
+print({'minX': coginfo.bounds.left, 'minZ': coginfo.bounds.bottom, 'maxX': coginfo.bounds.right, 'maxZ': coginfo.bounds.top})
 
 app = FastAPI(
     title="rio-tiler",
@@ -78,7 +80,6 @@ async def tile(
     if not cog.tile_exists(x, y, z):
         raise HTTPException(status_code=404, detail="Tile does not exist")
     img = cog.tile(x, y, z)
-    print(img.bounds)
     count, height, width = img.data.shape
     output_profile = dict(
         driver="GTIFF",
