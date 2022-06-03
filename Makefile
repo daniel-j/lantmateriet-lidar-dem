@@ -12,6 +12,8 @@ $(OUTPUTDIR)/%.tif: $(INPUTDIR)/%.laz
 	@echo "Processing $<"
 	@mkdir -pv $(dir $@)
 	@time ./process.py "$<" "$@" 500
+	@rio cogeo create "$@.tmp.tif" "$@"
+	@rm -fv "$@.tmp.tif" "$@.laz"
 #	@IFS='_' read -r -a arr <<< "$<"; time pdal pipeline ./pipeline_raster.json --readers.las.filename="$<" --writers.raster.filename="$@.tmp" --filters.faceraster.origin_y="$$(($${arr[1]}*100))" --filters.faceraster.origin_x="$$(($${arr[2]}*100))"
 #	@gdal_fillnodata.py -md 2500 "$@.tmp" "$@" -co COMPRESS=ZSTD
 #	@gdal_translate -srcwin 10 10 2500 2500 merged1f.tif merged1fc.tif -co COMPRESS=ZSTD
