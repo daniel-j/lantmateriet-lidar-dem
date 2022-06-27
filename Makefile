@@ -1,4 +1,5 @@
 
+SHELL = bash
 INPUTDIR = input
 OUTPUTDIR = output
 LIDARFILES = $(shell find $(INPUTDIR) -maxdepth 3 -type f -name '*.laz' | sort)
